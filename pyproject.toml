@@ -1,0 +1,14 @@
+[project]
+name = "comfyui-directors-table"
+description = "A director's desk on top of ComfyUI: piano-key studios, Maestro presets, camera sphere, script-to-film and code-drawn VFX for LTX-2. Open weights only."
+version = "1.3.6"
+license = { file = "LICENSE" }
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/"
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "Director's Table"
+Icon = ""

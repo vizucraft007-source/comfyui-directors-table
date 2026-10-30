@@ -1,0 +1,1100 @@
+{
+ "categories": [
+  {
+   "id": "camera",
+   "title": "Камера",
+   "icon": "🎥",
+   "about": "облёты, наезды, панорамы"
+  },
+  {
+   "id": "fx",
+   "title": "Эффекты",
+   "icon": "🔥",
+   "about": "кино, погода, реклама, переходы, фэнтези"
+  },
+  {
+   "id": "cinema",
+   "title": "Синема",
+   "icon": "🎞",
+   "about": "свет, плёнка, настроение"
+  },
+  {
+   "id": "time",
+   "title": "Время",
+   "icon": "⏱",
+   "about": "slow-mo, таймлапс, заморозка"
+  },
+  {
+   "id": "shot",
+   "title": "Ракурс",
+   "icon": "🖼",
+   "about": "крупный, общий, низкий ракурс"
+  },
+  {
+   "id": "lens",
+   "title": "Объектив",
+   "icon": "🔭",
+   "about": "широкий, портрет, макро, фишай"
+  },
+  {
+   "id": "light",
+   "title": "Свет",
+   "icon": "💡",
+   "about": "контровой, низкий ключ, неон, свечи"
+  },
+  {
+   "id": "genre",
+   "title": "Жанр",
+   "icon": "🎭",
+   "about": "хоррор, фантастика, аниме, реклама"
+  },
+  {
+   "id": "color",
+   "title": "Цвет",
+   "icon": "🎨",
+   "about": "тил-оранж, ч/б, пастель, VHS"
+  }
+ ],
+ "presets": [
+  {
+   "id": "cam-orbit",
+   "cat": "camera",
+   "title": "Облёт 360°",
+   "icon": "🔄",
+   "anim": "orbit",
+   "about": "камера плавно облетает героя",
+   "prompt": "{prompt}. The camera performs a smooth continuous 360-degree orbit around the subject at eye level, steady speed, the subject stays centered and in focus."
+  },
+  {
+   "id": "cam-push",
+   "cat": "camera",
+   "title": "Наезд",
+   "icon": "➡️",
+   "anim": "zoomin",
+   "about": "медленный наезд к лицу",
+   "prompt": "{prompt}. Slow cinematic dolly-in toward the subject, smooth and steady, ending on a closer framing."
+  },
+  {
+   "id": "cam-pull",
+   "cat": "camera",
+   "title": "Отъезд",
+   "icon": "⬅️",
+   "anim": "zoomout",
+   "about": "камера отъезжает, открывая место",
+   "prompt": "{prompt}. Slow dolly-out pulling away from the subject, revealing more of the environment, smooth motion."
+  },
+  {
+   "id": "cam-left",
+   "cat": "camera",
+   "title": "Проезд влево",
+   "icon": "↩️",
+   "anim": "panl",
+   "about": "боковой трекинг",
+   "prompt": "{prompt}. The camera tracks smoothly to the left, parallel to the subject, with gentle parallax in the background."
+  },
+  {
+   "id": "cam-right",
+   "cat": "camera",
+   "title": "Проезд вправо",
+   "icon": "↪️",
+   "anim": "panr",
+   "about": "боковой трекинг",
+   "prompt": "{prompt}. The camera tracks smoothly to the right, parallel to the subject, with gentle parallax in the background."
+  },
+  {
+   "id": "cam-crane-up",
+   "cat": "camera",
+   "title": "Кран вверх",
+   "icon": "⤴️",
+   "anim": "up",
+   "about": "подъём над сценой",
+   "prompt": "{prompt}. Crane shot rising up and slightly tilting down, revealing the scene from above, slow and majestic."
+  },
+  {
+   "id": "cam-crane-down",
+   "cat": "camera",
+   "title": "Кран вниз",
+   "icon": "⤵️",
+   "anim": "down",
+   "about": "спуск к герою",
+   "prompt": "{prompt}. Crane shot descending from above down to the subject's eye level, smooth motion."
+  },
+  {
+   "id": "cam-hand",
+   "cat": "camera",
+   "title": "Ручная камера",
+   "icon": "🤳",
+   "anim": "shake",
+   "about": "живая, документальная",
+   "prompt": "{prompt}. Handheld camera with subtle natural shake, documentary feel, following the action closely."
+  },
+  {
+   "id": "cam-static",
+   "cat": "camera",
+   "title": "Статика",
+   "icon": "⏸",
+   "anim": "pulse",
+   "about": "камера стоит, двигается только сцена",
+   "prompt": "{prompt}. Locked-off static camera on a tripod, no camera movement, only the subject moves."
+  },
+  {
+   "id": "cam-fpv",
+   "cat": "camera",
+   "title": "FPV-пролёт",
+   "icon": "🚁",
+   "anim": "panr",
+   "about": "дрон влетает в сцену",
+   "prompt": "{prompt}. Fast FPV drone fly-through, swooping low and diving toward the subject, dynamic banking turns, motion blur."
+  },
+  {
+   "id": "cin-blue",
+   "cat": "cinema",
+   "title": "Blue hour",
+   "icon": "🌌",
+   "anim": "pulse",
+   "about": "сумерки, холодный синий",
+   "prompt": "{prompt}. Shot at blue hour, cool deep-blue ambient light, soft glowing city lights, cinematic."
+  },
+  {
+   "id": "cin-golden",
+   "cat": "cinema",
+   "title": "Золотой час",
+   "icon": "🌅",
+   "anim": "pulse",
+   "about": "тёплый закатный свет",
+   "prompt": "{prompt}. Golden hour sunlight, warm low sun, long soft shadows, lens flare, cinematic."
+  },
+  {
+   "id": "cin-noir",
+   "cat": "cinema",
+   "title": "Неон-нуар",
+   "icon": "🌃",
+   "anim": "flicker",
+   "about": "неон, мокрый асфальт",
+   "prompt": "{prompt}. Neon noir look, magenta and cyan neon light, wet streets with reflections, haze, high contrast."
+  },
+  {
+   "id": "cin-film",
+   "cat": "cinema",
+   "title": "Плёнка 35 мм",
+   "icon": "🎞",
+   "anim": "shake",
+   "about": "зерно, мягкие цвета",
+   "prompt": "{prompt}. Shot on 35mm film, Kodak Portra colors, natural film grain, soft highlight roll-off."
+  },
+  {
+   "id": "cin-anamorphic",
+   "cat": "cinema",
+   "title": "Анаморф",
+   "icon": "🔭",
+   "anim": "panr",
+   "about": "широкий кадр, блики",
+   "prompt": "{prompt}. Anamorphic lens, wide cinematic framing, horizontal blue lens flares, oval bokeh, shallow depth of field."
+  },
+  {
+   "id": "cin-thriller",
+   "cat": "cinema",
+   "title": "Холодный триллер",
+   "icon": "🧊",
+   "anim": "pulse",
+   "about": "сине-зелёный, жёсткий свет",
+   "prompt": "{prompt}. Cold teal-green color grade, hard top light, deep shadows, tense thriller atmosphere."
+  },
+  {
+   "id": "cin-vintage",
+   "cat": "cinema",
+   "title": "Тёплый винтаж",
+   "icon": "📷",
+   "anim": "pulse",
+   "about": "70-е, выцветшие цвета",
+   "prompt": "{prompt}. Warm 1970s vintage look, faded colors, soft halation, nostalgic mood."
+  },
+  {
+   "id": "cin-doc",
+   "cat": "cinema",
+   "title": "Документальный",
+   "icon": "🎙",
+   "anim": "shake",
+   "about": "естественный свет, реализм",
+   "prompt": "{prompt}. Documentary style, natural available light, realistic colors, observational camera."
+  },
+  {
+   "id": "time-slow",
+   "cat": "time",
+   "title": "Slow motion",
+   "icon": "🐢",
+   "anim": "slow",
+   "about": "замедление",
+   "prompt": "{prompt}. Dramatic slow motion, every detail visible, smooth fluid movement, high frame rate look."
+  },
+  {
+   "id": "time-lapse",
+   "cat": "time",
+   "title": "Таймлапс",
+   "icon": "⏩",
+   "anim": "orbit",
+   "about": "время летит",
+   "prompt": "{prompt}. Timelapse, clouds and light move rapidly, time passing quickly while the camera stays steady."
+  },
+  {
+   "id": "time-freeze",
+   "cat": "time",
+   "title": "Заморозка (bullet time)",
+   "icon": "🧊",
+   "anim": "orbit",
+   "about": "время стоит, камера облетает",
+   "prompt": "{prompt}. Bullet time: the action is frozen in mid-air while the camera slowly orbits around the frozen moment."
+  },
+  {
+   "id": "time-fast",
+   "cat": "time",
+   "title": "Ускорение",
+   "icon": "⚡",
+   "anim": "panr",
+   "about": "энергичный темп",
+   "prompt": "{prompt}. Fast-paced energetic motion, quick action, dynamic rhythm."
+  },
+  {
+   "id": "shot-close",
+   "cat": "shot",
+   "title": "Крупный план",
+   "icon": "👁",
+   "anim": "zoomin",
+   "about": "лицо во весь кадр",
+   "prompt": "{prompt}. Close-up shot of the face, shallow depth of field, detailed skin and eyes."
+  },
+  {
+   "id": "shot-wide",
+   "cat": "shot",
+   "title": "Общий план",
+   "icon": "🏞",
+   "anim": "zoomout",
+   "about": "герой и всё место",
+   "prompt": "{prompt}. Wide establishing shot showing the subject within the whole environment."
+  },
+  {
+   "id": "shot-low",
+   "cat": "shot",
+   "title": "Низкий ракурс",
+   "icon": "⬆️",
+   "anim": "up",
+   "about": "снизу — герой мощнее",
+   "prompt": "{prompt}. Low-angle shot looking up at the subject, making them look powerful and heroic."
+  },
+  {
+   "id": "shot-top",
+   "cat": "shot",
+   "title": "Сверху",
+   "icon": "⬇️",
+   "anim": "down",
+   "about": "вид сверху вниз",
+   "prompt": "{prompt}. Top-down overhead shot looking straight down at the scene."
+  },
+  {
+   "id": "shot-ots",
+   "cat": "shot",
+   "title": "Через плечо",
+   "icon": "👤",
+   "anim": "panl",
+   "about": "из-за плеча собеседника",
+   "prompt": "{prompt}. Over-the-shoulder shot, the foreground shoulder out of focus, the other person in focus."
+  },
+  {
+   "id": "cam-dollyzoom",
+   "cat": "camera",
+   "title": "Долли-зум (Хичкок)",
+   "icon": "🌀",
+   "about": "фон «растягивается», герой на месте",
+   "prompt": "{prompt}. Dolly zoom (vertigo effect): the camera dollies in while zooming out, the subject stays the same size while the background stretches dramatically.",
+   "anim": "zoomin"
+  },
+  {
+   "id": "cam-crashzoom",
+   "cat": "camera",
+   "title": "Резкий зум",
+   "icon": "💥",
+   "about": "быстрый наезд-удар",
+   "prompt": "{prompt}. Fast crash zoom straight into the subject's face, sudden and punchy, slight motion blur.",
+   "anim": "zoomin"
+  },
+  {
+   "id": "cam-whip",
+   "cat": "camera",
+   "title": "Хлёсткая панорама",
+   "icon": "💨",
+   "about": "резкий поворот камеры",
+   "prompt": "{prompt}. Whip pan: the camera swings fast to the side with strong motion blur, then settles on the subject.",
+   "anim": "panl"
+  },
+  {
+   "id": "cam-arc",
+   "cat": "camera",
+   "title": "Полукруг",
+   "icon": "◐",
+   "about": "камера обходит героя на 90°",
+   "prompt": "{prompt}. The camera arcs smoothly around the subject by about 90 degrees, keeping them centered, cinematic parallax.",
+   "anim": "orbit"
+  },
+  {
+   "id": "cam-tiltup",
+   "cat": "camera",
+   "title": "Наклон вверх",
+   "icon": "⤴",
+   "about": "взгляд снизу вверх",
+   "prompt": "{prompt}. The camera tilts up slowly from the ground to reveal the subject and the sky above.",
+   "anim": "up"
+  },
+  {
+   "id": "cam-snorri",
+   "cat": "camera",
+   "title": "Камера на герое",
+   "icon": "🤳",
+   "about": "snorricam: камера закреплена на теле",
+   "prompt": "{prompt}. Snorricam: the camera is rigidly attached to the subject's body, the face stays locked in frame while the world moves and shakes behind.",
+   "anim": "pulse"
+  },
+  {
+   "id": "cam-through",
+   "cat": "camera",
+   "title": "Сквозь объект",
+   "icon": "🕳",
+   "about": "пролёт сквозь окно или щель",
+   "prompt": "{prompt}. The camera flies smoothly through a window or narrow gap into the scene, continuous one-take movement.",
+   "anim": "zoomin"
+  },
+  {
+   "id": "cam-robo",
+   "cat": "camera",
+   "title": "Робо-рука",
+   "icon": "🦾",
+   "about": "точный быстрый облёт как в рекламе",
+   "prompt": "{prompt}. High-speed robotic arm camera move: fast precise swoop around the subject with a sudden smooth stop, commercial product-shot style.",
+   "anim": "orbit"
+  },
+  {
+   "id": "cam-focus",
+   "cat": "camera",
+   "title": "Перевод фокуса",
+   "icon": "🎯",
+   "about": "фокус с переднего плана на героя",
+   "prompt": "{prompt}. Rack focus: the focus shifts smoothly from a blurred foreground object to the subject.",
+   "anim": "pulse"
+  },
+  {
+   "id": "cam-drone",
+   "cat": "camera",
+   "title": "Дрон сверху",
+   "icon": "🚁",
+   "about": "высокий плавный облёт местности",
+   "prompt": "{prompt}. Aerial drone shot high above, slowly gliding forward and revealing the landscape, smooth and stable.",
+   "anim": "up"
+  },
+  {
+   "id": "fx-explosion",
+   "cat": "fx",
+   "sub": "cine",
+   "title": "Взрыв за спиной",
+   "icon": "💥",
+   "anim": "shake",
+   "about": "огненный шар и ударная волна",
+   "prompt": "{prompt}. A massive explosion erupts in the background, a rolling fireball and shockwave, debris flying past, the subject keeps walking toward the camera, warm light on the face."
+  },
+  {
+   "id": "fx-groundstrike",
+   "cat": "fx",
+   "sub": "cine",
+   "title": "Молния бьёт в землю",
+   "icon": "⚡",
+   "anim": "flicker",
+   "about": "разряд в точку рядом с героем",
+   "prompt": "{prompt}. A single bright lightning bolt strikes the ground right next to the subject, a blinding blue-white flash, sparks and dust burst from the impact point, the scene lights up for an instant.",
+   "vfx": "lightning"
+  },
+  {
+   "id": "fx-shockwave",
+   "cat": "fx",
+   "sub": "cine",
+   "title": "Ударная волна",
+   "icon": "🌀",
+   "anim": "pulse",
+   "about": "кольцо искажения, пыль разлетается",
+   "prompt": "{prompt}. A powerful shockwave ring bursts outward from the impact, the air ripples and distorts, dust and small debris are blown away from the center.",
+   "vfx": "shockwave"
+  },
+  {
+   "id": "fx-debris",
+   "cat": "fx",
+   "sub": "cine",
+   "title": "Обломки и пыль",
+   "icon": "🪨",
+   "anim": "down",
+   "about": "удар, крошка, облако пыли",
+   "prompt": "{prompt}. A heavy impact cracks the ground, chunks of concrete and debris fly up and fall back, a thick cloud of dust rolls outward."
+  },
+  {
+   "id": "fx-sparks",
+   "cat": "fx",
+   "sub": "cine",
+   "title": "Искры от металла",
+   "icon": "✨",
+   "anim": "down",
+   "about": "фонтан искр, как от болгарки",
+   "prompt": "{prompt}. A fountain of bright orange sparks sprays out from metal grinding, sparks bounce off the floor and fade, hot glints in the dark.",
+   "vfx": "sparks"
+  },
+  {
+   "id": "fx-fire",
+   "cat": "fx",
+   "sub": "cine",
+   "title": "Огонь",
+   "icon": "🔥",
+   "anim": "flicker",
+   "about": "пламя разгорается, угли летят",
+   "prompt": "{prompt}. Realistic fire ignites and grows, flickering flames, embers rising, warm orange light dancing on the scene.",
+   "vfx": "fire"
+  },
+  {
+   "id": "fx-burn",
+   "cat": "fx",
+   "sub": "cine",
+   "title": "Герой в огне",
+   "icon": "🔥",
+   "anim": "flicker",
+   "about": "охвачен пламенем, но цел",
+   "prompt": "{prompt}. The subject is engulfed in roaring flames yet unharmed, fire swirling around the body, embers flying, intense heat haze."
+  },
+  {
+   "id": "fx-glass",
+   "cat": "fx",
+   "sub": "cine",
+   "title": "Разбитое стекло",
+   "icon": "🪟",
+   "anim": "shake",
+   "about": "осколки летят в камеру",
+   "prompt": "{prompt}. A pane of glass shatters in slow motion, shards fly toward the camera, glittering reflections in every fragment."
+  },
+  {
+   "id": "fx-smoke",
+   "cat": "fx",
+   "sub": "cine",
+   "title": "Дым",
+   "icon": "🌫",
+   "anim": "up",
+   "about": "клубы дыма, лучи сквозь него",
+   "prompt": "{prompt}. Thick billowing smoke rolls through the scene, volumetric light beams cut through it, slow swirling motion.",
+   "vfx": "smoke"
+  },
+  {
+   "id": "fx-lightning",
+   "cat": "fx",
+   "sub": "atmo",
+   "title": "Гроза в небе",
+   "icon": "🌩",
+   "anim": "flicker",
+   "about": "молнии в тучах, вспышки на сцене",
+   "prompt": "{prompt}. A thunderstorm rages in the sky, lightning bolts flash between dark clouds, each flash briefly lights the whole scene in blue-white light.",
+   "vfx": "lightning"
+  },
+  {
+   "id": "fx-rain",
+   "cat": "fx",
+   "sub": "atmo",
+   "title": "Ливень",
+   "icon": "🌧",
+   "anim": "rain",
+   "about": "мокрые отражения, капли на объективе",
+   "prompt": "{prompt}. Heavy rain pours down, wet reflective surfaces, droplets on the lens, moody atmosphere.",
+   "vfx": "rain"
+  },
+  {
+   "id": "fx-snow",
+   "cat": "fx",
+   "sub": "atmo",
+   "title": "Снегопад",
+   "icon": "❄",
+   "anim": "down",
+   "about": "мягкий снег, холодный свет",
+   "prompt": "{prompt}. Soft snow falls gently, flakes drifting in the air, cold winter light, breath visible in the air.",
+   "vfx": "snow"
+  },
+  {
+   "id": "fx-fograys",
+   "cat": "fx",
+   "sub": "atmo",
+   "title": "Туман и лучи",
+   "icon": "🌫",
+   "anim": "slow",
+   "about": "объёмные лучи сквозь дымку",
+   "prompt": "{prompt}. Low fog drifts across the ground, god rays of light cut through the haze in visible volumetric beams."
+  },
+  {
+   "id": "fx-dustlight",
+   "cat": "fx",
+   "sub": "atmo",
+   "title": "Пылинки в луче",
+   "icon": "🔆",
+   "anim": "up",
+   "about": "частицы в полосе света",
+   "prompt": "{prompt}. Tiny dust particles float and sparkle inside a single beam of sunlight, calm and cinematic."
+  },
+  {
+   "id": "fx-wind",
+   "cat": "fx",
+   "sub": "atmo",
+   "title": "Ураганный ветер",
+   "icon": "🌪",
+   "anim": "panr",
+   "about": "волосы и одежда, летят листья",
+   "prompt": "{prompt}. Strong gusts of wind blast through the scene, hair and clothes whip wildly, leaves and debris fly across the frame."
+  },
+  {
+   "id": "fx-flood",
+   "cat": "fx",
+   "sub": "atmo",
+   "title": "Затопление",
+   "icon": "🌊",
+   "anim": "up",
+   "about": "вода заливает пространство",
+   "prompt": "{prompt}. Water rapidly floods the space, rising waves pour in and fill the room, splashes and reflections, objects float."
+  },
+  {
+   "id": "fx-splash",
+   "cat": "fx",
+   "sub": "ads",
+   "title": "Брызги вокруг продукта",
+   "icon": "💦",
+   "anim": "pulse",
+   "about": "жидкость, застывшая в воздухе",
+   "prompt": "{prompt}. A dynamic splash of liquid bursts around the product, droplets frozen in mid-air in high-speed photography style, clean studio lighting."
+  },
+  {
+   "id": "fx-lightsweep",
+   "cat": "fx",
+   "sub": "ads",
+   "title": "Блик по продукту",
+   "icon": "✦",
+   "anim": "panr",
+   "about": "полоса света пробегает по поверхности",
+   "prompt": "{prompt}. A sleek streak of light sweeps across the product surface from left to right, glossy reflections, premium commercial look, dark background."
+  },
+  {
+   "id": "fx-steam",
+   "cat": "fx",
+   "sub": "ads",
+   "title": "Пар и аромат",
+   "icon": "♨",
+   "anim": "up",
+   "about": "лёгкий пар от горячего",
+   "prompt": "{prompt}. Gentle wisps of steam rise from the hot food or drink, soft backlight makes the steam glow, appetizing close-up."
+  },
+  {
+   "id": "fx-reveal",
+   "cat": "fx",
+   "sub": "ads",
+   "title": "Появление из частиц",
+   "icon": "🌟",
+   "anim": "zoomin",
+   "about": "продукт собирается из света",
+   "prompt": "{prompt}. Glowing particles swirl together and assemble into the product, a soft flash completes the reveal, elegant commercial style.",
+   "vfx": "magic"
+  },
+  {
+   "id": "fx-levitate",
+   "cat": "fx",
+   "sub": "ads",
+   "title": "Парит в воздухе",
+   "icon": "🪽",
+   "anim": "up",
+   "about": "невесомость, медленное вращение",
+   "prompt": "{prompt}. The product or subject slowly levitates and rotates weightlessly, small elements float around it, clean soft shadow below."
+  },
+  {
+   "id": "fx-flare",
+   "cat": "fx",
+   "sub": "ads",
+   "title": "Блики и засветки",
+   "icon": "☀",
+   "anim": "panl",
+   "about": "lens flare и тёплые засветки плёнки",
+   "prompt": "{prompt}. Warm anamorphic lens flares and soft light leaks drift across the frame, dreamy premium film look."
+  },
+  {
+   "id": "fx-flash",
+   "cat": "fx",
+   "sub": "trans",
+   "title": "Вспышка-переход",
+   "icon": "⚪",
+   "anim": "pulse",
+   "about": "белая вспышка, смена сцены",
+   "prompt": "{prompt}. A bright white flash fills the frame and fades to reveal the scene, a clean flash transition."
+  },
+  {
+   "id": "fx-whip",
+   "cat": "fx",
+   "sub": "trans",
+   "title": "Рывок камеры",
+   "icon": "💨",
+   "anim": "panr",
+   "about": "смаз движения как переход",
+   "prompt": "{prompt}. The camera whips sideways with strong motion blur, a fast whip-pan transition into the scene."
+  },
+  {
+   "id": "fx-glitch",
+   "cat": "fx",
+   "sub": "trans",
+   "title": "Глитч",
+   "icon": "📺",
+   "anim": "shake",
+   "about": "RGB-сдвиг, полосы",
+   "prompt": "{prompt}. Digital glitch effect, RGB split, flickering scanlines and pixel blocks distort the image for a moment.",
+   "vfx": "glitch"
+  },
+  {
+   "id": "fx-ink",
+   "cat": "fx",
+   "sub": "trans",
+   "title": "Чернила в воде",
+   "icon": "🎨",
+   "anim": "slow",
+   "about": "цветные облака как переход",
+   "prompt": "{prompt}. Colorful ink clouds bloom and swirl in water and wash over the frame, revealing the subject."
+  },
+  {
+   "id": "fx-dissolve",
+   "cat": "fx",
+   "sub": "trans",
+   "title": "Рассыпаться в пыль",
+   "icon": "🌬",
+   "anim": "panr",
+   "about": "герой уходит частицами",
+   "prompt": "{prompt}. The subject slowly disintegrates into drifting dust particles carried away by the wind.",
+   "vfx": "dissolve"
+  },
+  {
+   "id": "fx-transform",
+   "cat": "fx",
+   "sub": "trans",
+   "title": "Превращение",
+   "icon": "🔄",
+   "anim": "orbit",
+   "about": "плавный морфинг в новую форму",
+   "prompt": "{prompt}. The subject smoothly morphs and transforms into a new form, a seamless magical transformation with sparkles."
+  },
+  {
+   "id": "fx-handbolt",
+   "cat": "fx",
+   "sub": "fantasy",
+   "title": "Молнии из рук",
+   "icon": "⚡",
+   "anim": "flicker",
+   "about": "энергия бьёт из ладоней героя",
+   "prompt": "{prompt}. Crackling electric lightning arcs shoot from the subject's raised hands, blue-white energy lights the face and surroundings, sparks fly.",
+   "vfx": "lightning"
+  },
+  {
+   "id": "fx-portal",
+   "cat": "fx",
+   "sub": "fantasy",
+   "title": "Магический портал",
+   "icon": "🌀",
+   "anim": "orbit",
+   "about": "кольцо энергии открывается",
+   "prompt": "{prompt}. A glowing swirling magic portal opens beside the subject, rings of energy, sparks, light spilling on the surroundings.",
+   "vfx": "portal"
+  },
+  {
+   "id": "fx-aura",
+   "cat": "fx",
+   "sub": "fantasy",
+   "title": "Аура силы",
+   "icon": "🟣",
+   "anim": "pulse",
+   "about": "свечение вокруг героя",
+   "prompt": "{prompt}. A glowing energy aura surrounds the subject, pulsing light, hair and clothes lifted by the power.",
+   "vfx": "aura"
+  },
+  {
+   "id": "fx-magic",
+   "cat": "fx",
+   "sub": "fantasy",
+   "title": "Магические частицы",
+   "icon": "✨",
+   "anim": "up",
+   "about": "светящиеся искры вьются вверх",
+   "prompt": "{prompt}. Glowing magical particles spiral upward around the subject, leaving soft trails of light.",
+   "vfx": "magic"
+  },
+  {
+   "id": "fx-ice",
+   "cat": "fx",
+   "sub": "fantasy",
+   "title": "Заморозка",
+   "icon": "🧊",
+   "anim": "slow",
+   "about": "иней бежит, герой застывает",
+   "prompt": "{prompt}. Frost spreads quickly across every surface, the subject freezes into glittering ice, cold mist rises."
+  },
+  {
+   "id": "fx-holo",
+   "cat": "fx",
+   "sub": "fantasy",
+   "title": "Голограмма",
+   "icon": "🔷",
+   "anim": "flicker",
+   "about": "мерцающий синий образ",
+   "prompt": "{prompt}. The subject turns into a flickering blue hologram with scanlines and light particles."
+  },
+  {
+   "id": "fx-trails",
+   "cat": "fx",
+   "sub": "fantasy",
+   "title": "Неоновые следы",
+   "icon": "〰",
+   "anim": "panr",
+   "about": "светящиеся шлейфы за движением",
+   "prompt": "{prompt}. Glowing neon light trails follow every movement of the subject, long exposure light painting."
+  },
+  {
+   "id": "fx-petals",
+   "cat": "fx",
+   "sub": "social",
+   "title": "Лепестки",
+   "icon": "🌸",
+   "anim": "down",
+   "about": "розовые лепестки в воздухе",
+   "prompt": "{prompt}. Pink flower petals swirl through the air in the wind, soft dreamy light."
+  },
+  {
+   "id": "fx-money",
+   "cat": "fx",
+   "sub": "social",
+   "title": "Дождь из денег",
+   "icon": "💸",
+   "anim": "down",
+   "about": "купюры падают в слоу-мо",
+   "prompt": "{prompt}. Banknotes rain down from above and flutter around the subject in slow motion."
+  },
+  {
+   "id": "fx-hearts",
+   "cat": "fx",
+   "sub": "social",
+   "title": "Сердечки",
+   "icon": "💖",
+   "anim": "up",
+   "about": "сердечки всплывают",
+   "prompt": "{prompt}. Small glowing hearts float up around the subject, playful and cute."
+  },
+  {
+   "id": "fx-glitter",
+   "cat": "fx",
+   "sub": "social",
+   "title": "Блёстки и конфетти",
+   "icon": "🎉",
+   "anim": "down",
+   "about": "праздничный дождь блёсток",
+   "prompt": "{prompt}. Golden glitter and confetti burst and fall around the subject, festive celebration."
+  },
+  {
+   "id": "time-reverse",
+   "cat": "time",
+   "title": "Обратная перемотка",
+   "icon": "⏪",
+   "about": "действие идёт назад",
+   "prompt": "{prompt}. The action plays in reverse, objects and particles flow backwards in time."
+  },
+  {
+   "id": "time-hyper",
+   "cat": "time",
+   "title": "Гиперлапс",
+   "icon": "🏃",
+   "about": "камера быстро движется сквозь время",
+   "prompt": "{prompt}. Hyperlapse: the camera moves forward quickly through the location while time speeds up around it."
+  },
+  {
+   "id": "shot-extreme",
+   "cat": "shot",
+   "title": "Сверхкрупно",
+   "icon": "👁",
+   "about": "только глаза или деталь",
+   "prompt": "{prompt}. Extreme close-up on the eyes, every eyelash and reflection visible, very shallow depth of field."
+  },
+  {
+   "id": "shot-pov",
+   "cat": "shot",
+   "title": "От первого лица",
+   "icon": "👀",
+   "about": "глазами героя",
+   "prompt": "{prompt}. First-person POV shot, seeing through the subject's eyes, hands visible in the frame."
+  },
+  {
+   "id": "shot-dutch",
+   "cat": "shot",
+   "title": "Голландский угол",
+   "icon": "📐",
+   "about": "наклонённый горизонт, тревога",
+   "prompt": "{prompt}. Dutch angle: the camera is tilted, the horizon is crooked, tense uneasy mood."
+  },
+  {
+   "id": "shot-medium",
+   "cat": "shot",
+   "title": "Средний план",
+   "icon": "🧍",
+   "about": "по пояс",
+   "prompt": "{prompt}. Medium shot from the waist up, natural framing, the subject in sharp focus."
+  },
+  {
+   "id": "lens-wide",
+   "cat": "lens",
+   "title": "Широкий 16 мм",
+   "icon": "🌐",
+   "about": "много пространства, глубина",
+   "prompt": "{prompt}. Shot on a 16mm ultra-wide lens, exaggerated perspective, deep focus, expansive space."
+  },
+  {
+   "id": "lens-portrait",
+   "cat": "lens",
+   "title": "Портрет 85 мм",
+   "icon": "👤",
+   "about": "размытый фон, мягкое боке",
+   "prompt": "{prompt}. Shot on an 85mm portrait lens at f/1.4, creamy bokeh, the background melts away, flattering compression."
+  },
+  {
+   "id": "lens-macro",
+   "cat": "lens",
+   "title": "Макро",
+   "icon": "🔬",
+   "about": "крошечные детали крупно",
+   "prompt": "{prompt}. Macro lens, tiny details magnified, extremely shallow depth of field, textures visible."
+  },
+  {
+   "id": "lens-fisheye",
+   "cat": "lens",
+   "title": "Фишай",
+   "icon": "🐟",
+   "about": "сильная бочка, скейт-видео",
+   "prompt": "{prompt}. Fisheye lens with strong barrel distortion, skate-video energy, very close to the subject."
+  },
+  {
+   "id": "lens-tilt",
+   "cat": "lens",
+   "title": "Тилт-шифт",
+   "icon": "🏘",
+   "about": "мир как игрушечный",
+   "prompt": "{prompt}. Tilt-shift lens, miniature effect, the scene looks like a tiny toy model with a thin band of focus."
+  },
+  {
+   "id": "lens-tele",
+   "cat": "lens",
+   "title": "Телевик 200 мм",
+   "icon": "🔭",
+   "about": "сжатая перспектива издалека",
+   "prompt": "{prompt}. Long 200mm telephoto lens, compressed perspective, the background looms large behind the subject, heat haze."
+  },
+  {
+   "id": "light-rim",
+   "cat": "light",
+   "title": "Контровой свет",
+   "icon": "🌗",
+   "about": "светящийся контур героя",
+   "prompt": "{prompt}. Strong rim light from behind outlining the subject's silhouette with a bright glowing edge, dark background."
+  },
+  {
+   "id": "light-lowkey",
+   "cat": "light",
+   "title": "Низкий ключ",
+   "icon": "🌑",
+   "about": "глубокие тени, драма",
+   "prompt": "{prompt}. Low-key lighting, a single hard light source, deep black shadows, high contrast chiaroscuro."
+  },
+  {
+   "id": "light-soft",
+   "cat": "light",
+   "title": "Мягкий студийный",
+   "icon": "☁",
+   "about": "ровный, красивый для лица",
+   "prompt": "{prompt}. Soft diffused studio lighting from a large softbox, even flattering light, gentle shadows."
+  },
+  {
+   "id": "light-neon",
+   "cat": "light",
+   "title": "Неоновая подсветка",
+   "icon": "🟣",
+   "about": "розово-синие отсветы",
+   "prompt": "{prompt}. Colorful neon lighting, pink and blue light spilling across the face and walls."
+  },
+  {
+   "id": "light-candle",
+   "cat": "light",
+   "title": "Свечи",
+   "icon": "🕯",
+   "about": "тёплый живой свет огня",
+   "prompt": "{prompt}. Warm flickering candlelight, orange glow, soft moving shadows, intimate mood."
+  },
+  {
+   "id": "light-strobe",
+   "cat": "light",
+   "title": "Стробоскоп",
+   "icon": "⚡",
+   "about": "вспышки как в клубе",
+   "prompt": "{prompt}. Pulsing strobe lights, rhythmic flashes freezing the motion, club atmosphere."
+  },
+  {
+   "id": "light-god",
+   "cat": "light",
+   "title": "Лучи света",
+   "icon": "🌤",
+   "about": "объёмные лучи сквозь дымку",
+   "prompt": "{prompt}. Volumetric god rays streaming through haze and dust, dramatic beams of light."
+  },
+  {
+   "id": "genre-horror",
+   "cat": "genre",
+   "title": "Хоррор",
+   "icon": "👻",
+   "about": "тьма, тревога, неясные тени",
+   "prompt": "{prompt}. Horror film atmosphere, dark and eerie, something lurking in the shadows, unsettling silence, desaturated colors."
+  },
+  {
+   "id": "genre-scifi",
+   "cat": "genre",
+   "title": "Фантастика",
+   "icon": "🛸",
+   "about": "футуристичный мир, технологии",
+   "prompt": "{prompt}. Science fiction film look, futuristic technology, holographic interfaces, sleek metallic surfaces, cool lighting."
+  },
+  {
+   "id": "genre-western",
+   "cat": "genre",
+   "title": "Вестерн",
+   "icon": "🤠",
+   "about": "пыль, солнце, пустыня",
+   "prompt": "{prompt}. Classic western film look, dusty desert, harsh sun, warm sepia tones, wide vistas."
+  },
+  {
+   "id": "genre-anime",
+   "cat": "genre",
+   "title": "Аниме",
+   "icon": "🌸",
+   "about": "рисованный стиль аниме",
+   "prompt": "{prompt}. Anime style, hand-drawn cel shading, vibrant colors, expressive eyes, dynamic speed lines."
+  },
+  {
+   "id": "genre-ad",
+   "cat": "genre",
+   "title": "Реклама",
+   "icon": "✨",
+   "about": "чисто, ярко, продукт в центре",
+   "prompt": "{prompt}. High-end commercial look, clean bright lighting, glossy surfaces, the product is the hero, polished and premium."
+  },
+  {
+   "id": "genre-music",
+   "cat": "genre",
+   "title": "Музыкальный клип",
+   "icon": "🎤",
+   "about": "ритм, свет, стиль",
+   "prompt": "{prompt}. Music video style, bold stylish lighting, rhythmic energetic motion, fashion-forward styling."
+  },
+  {
+   "id": "genre-fantasy",
+   "cat": "genre",
+   "title": "Фэнтези",
+   "icon": "🐉",
+   "about": "магия, замки, сказка",
+   "prompt": "{prompt}. Epic fantasy film look, magical atmosphere, ancient castles, glowing particles, rich colors."
+  },
+  {
+   "id": "genre-cartoon3d",
+   "cat": "genre",
+   "title": "3D-мультфильм",
+   "icon": "🧸",
+   "about": "как в анимационном кино",
+   "prompt": "{prompt}. 3D animated movie style, soft stylized characters, warm lighting, playful and colorful."
+  },
+  {
+   "id": "color-tealorange",
+   "cat": "color",
+   "title": "Тил-оранж",
+   "icon": "🟠",
+   "about": "блокбастерная гамма",
+   "prompt": "{prompt}. Teal and orange blockbuster color grade, warm skin tones against cool shadows."
+  },
+  {
+   "id": "color-bw",
+   "cat": "color",
+   "title": "Чёрно-белое",
+   "icon": "⚫",
+   "about": "контрастное ч/б",
+   "prompt": "{prompt}. Black and white, rich contrast, deep blacks and bright highlights, classic monochrome."
+  },
+  {
+   "id": "color-bleach",
+   "cat": "color",
+   "title": "Bleach bypass",
+   "icon": "🩶",
+   "about": "выцветшее, жёсткое",
+   "prompt": "{prompt}. Bleach bypass look, desaturated colors, high contrast, gritty metallic tones."
+  },
+  {
+   "id": "color-pastel",
+   "cat": "color",
+   "title": "Пастель",
+   "icon": "🩷",
+   "about": "нежные светлые цвета",
+   "prompt": "{prompt}. Soft pastel color palette, light airy tones, dreamy and gentle."
+  },
+  {
+   "id": "color-vhs",
+   "cat": "color",
+   "title": "VHS-кассета",
+   "icon": "📼",
+   "about": "ретро-видео 90-х",
+   "prompt": "{prompt}. Retro 1990s VHS tape look, color bleeding, tracking lines, soft low resolution, timestamp feel."
+  },
+  {
+   "id": "color-vivid",
+   "cat": "color",
+   "title": "Сочные цвета",
+   "icon": "🌈",
+   "about": "насыщенно и ярко",
+   "prompt": "{prompt}. Vivid saturated colors, punchy contrast, bright and energetic."
+  }
+ ],
+ "fxSubs": [
+  {
+   "id": "cine",
+   "title": "Кино и экшн",
+   "icon": "🎬",
+   "about": "взрывы, удары, огонь, искры"
+  },
+  {
+   "id": "atmo",
+   "title": "Атмосфера и погода",
+   "icon": "🌩",
+   "about": "гроза, дождь, туман, ветер"
+  },
+  {
+   "id": "ads",
+   "title": "Реклама и продукт",
+   "icon": "🛍",
+   "about": "брызги, блик, пар, появление"
+  },
+  {
+   "id": "trans",
+   "title": "Переходы",
+   "icon": "🔀",
+   "about": "вспышка, рывок, глитч, чернила"
+  },
+  {
+   "id": "fantasy",
+   "title": "Фэнтези и мульт",
+   "icon": "🪄",
+   "about": "молнии из рук, портал, аура"
+  },
+  {
+   "id": "social",
+   "title": "Для соцсетей",
+   "icon": "💖",
+   "about": "сердечки, блёстки, лепестки"
+  }
+ ]
+}

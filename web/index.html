@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Director's Table</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/directors-table/style.css">
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- ВЕРХ: показатели (выезжают подробно при наведении) -->
+  <header class="top" id="top">
+    <div class="brand"><h1>Director’s <i>Table</i></h1></div>
+    <div class="mini" id="mini">
+      <span class="m"><b>GPU</b><em id="sGpu">—</em></span>
+      <span class="m"><b>VRAM</b><i class="bar"><i id="bVram"></i></i><em id="sVram">—</em></span>
+      <span class="m"><b>RAM</b><i class="bar"><i id="bRam"></i></i><em id="sRam">—</em></span>
+      <span class="m"><b>t°</b><em id="sTemp">—</em></span>
+    </div>
+    <div class="conn" id="conn"><span class="dot"></span><span id="connTxt">Подключение…</span></div>
+    <button class="errs" id="errBadge" hidden title="Ошибки генерации: наведите — посмотреть, клик — закрепить"></button>
+    <button class="hfree" id="btnHoldFree" title="Освободить память ComfyUI — удерживайте 1 секунду"><i></i><span class="hf-ic">🧹</span><span class="hf-l">Освободить память</span></button>
+    <div class="spacer"></div>
+    <nav class="wftabs" id="wfTabs"></nav>
+    <button class="btn ghost mic" id="btnMic" title="Голос: удерживайте клавишу Ё (`) или нажмите здесь"><span class="micdot"></span>Голос</button>
+    <button class="btn ghost eye" id="btnRest" title="Шторки: скрыть стол, пока идёт работа (Shift+P)"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></button>
+    <button class="btn ghost" id="btnSettings">Настройки</button>
+    <div class="top-more" id="topMore">
+      <div class="tm-grid" id="tmGrid"></div>
+    </div>
+  </header>
+
+  <div class="stage" id="stage">
+    <!-- холст -->
+    <main class="board" id="board"><div class="canvas" id="canvas"><svg class="area-lines" id="areaLines"></svg><svg class="threads" id="threads"></svg><div class="areas" id="areas"></div><div class="cards" id="cards"></div><div class="marquee" id="marquee" hidden></div></div></main>
+
+    <!-- workflow внутри стола -->
+    <section class="wfview" id="wfView" hidden><div class="wfbar"><b id="wfvTitle"></b><span id="wfvHint">Это шаблон виджета. Поправьте ноды и нажмите «Сохранить в виджет». Здесь подставлен последний запуск со стола: ваша картинка, звук и промпт.</span><span class="wfvrun" id="wfvRun" hidden></span><div class="spacer"></div><button class="btn small" id="wfvSave">Сохранить в виджет</button><button class="btn small primary" id="wfvBack">← На стол <kbd>Esc</kbd></button></div><div class="wfframes" id="wfFrames"></div></section>
+
+    <!-- угол под названием -->
+    <aside class="corner" id="corner">
+      <div class="corner-tab" title="Инструменты"><svg viewBox="0 0 20 20" width="16" height="16"><path d="M3 3h5v5H3zM12 3h5v5h-5zM3 12h5v5H3zM12 12h5v5h-5z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div>
+      <div class="corner-body">
+        <h3>Инструменты</h3>
+        <div class="tgrp" style="--c:#f0ff41"><div class="tgh">Начать</div>
+          <button class="tool" data-tool="tour">▶ Знакомство со столом</button>
+        </div>
+        <div class="tgrp" style="--c:#8f74f2"><div class="tgh">Создать</div>
+          <button class="tool" data-tool="film">🎬 Фильм по сценарию…</button>
+          <button class="tool" data-tool="chars">👤 Персонажи…</button>
+          <button class="tool" data-tool="wish">✨ Хочу такой workflow…</button>
+        </div>
+        <div class="tgrp" style="--c:#3fd2ff"><div class="tgh">Workflow и модели</div>
+          <button class="tool" data-tool="templates">📚 Шаблоны Comfy…</button>
+          <button class="tool" data-tool="comfy-wf">🗂 Мои workflow из ComfyUI…</button>
+          <button class="tool" data-tool="import-wf">＋ Добавить workflow (API JSON)…</button>
+          <button class="tool" data-tool="import-folder">📁 Импорт папки…</button>
+          <button class="tool" data-tool="models">🧠 Модели и железо…</button>
+        </div>
+        <div class="tgrp" style="--c:#ffb547"><div class="tgh">Стол и зоны</div>
+          <label class="tool sel">Раскладка сцены<select id="layoutSel"></select></label>
+          <button class="tool" data-tool="sort">Разложить по областям<kbd>Ctrl+Пробел</kbd></button>
+          <label class="tool sel">Сортировка<select id="sortSel"><option value="date">по дате</option><option value="name">по имени</option></select></label>
+          <button class="tool" data-tool="zedit">Редактор зон…</button>
+          <button class="tool" data-tool="lines">Линии зон: <b id="lineStyleName">по краю</b><kbd>Shift+G</kbd></button>
+          <button class="tool" data-tool="hints">Зоны: сменить режим<kbd>Shift+H</kbd></button>
+          <button class="tool" data-tool="lock">Замок<kbd>Shift+L</kbd></button>
+          <button class="tool" data-tool="midi">🎹 Подключить MIDI-клавиатуру</button>
+        </div>
+        <div class="tgrp" style="--c:#ff6b5e"><div class="tgh">Система</div>
+          <button class="tool" data-tool="free">Освободить видеопамять</button>
+          <button class="tool" data-tool="export">Сохранить проект в файл</button>
+          <button class="tool danger" data-tool="clear">Очистить сцену</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- лево: медиатека -->
+    <aside class="edge left" id="left">
+      <div class="edge-grip" title="Медиатека"></div>
+      <div class="edge-body">
+        <header><h2>Медиатека</h2><button class="pin" data-pin="left" title="Закрепить">⌖</button></header>
+        <div class="lib-tabs" id="libTabs"></div>
+        <div class="lib" id="lib"></div>
+      </div>
+    </aside>
+
+    <!-- право: вкладки -->
+    <aside class="edge right" id="right">
+      <div class="edge-grip" title="Файлы, монтаж, задачи"></div>
+      <div class="edge-body">
+        <div class="resize" id="rightResize" title="Потяните, чтобы изменить ширину"></div>
+        <header><nav class="tabs" id="rTabs"><button data-tab="files" class="on">Файлы</button><button data-tab="cut">Монтаж</button><button data-tab="tasks">Задачи</button></nav><button class="pin" data-pin="right" title="Закрепить">⌖</button></header>
+        <section class="tab" data-tab="files" id="tabFiles"></section>
+        <section class="tab" data-tab="cut" id="tabCut" hidden>
+          <div class="screen"><video id="cutVideo" playsinline></video><img id="cutImg" alt="" hidden><div class="screen-empty" id="cutEmpty">Положите клипы в область «Монтаж» в центре холста — порядок слева направо.</div><div class="tc" id="cutTc">00:00</div></div>
+          <div class="cut-ctrl"><button class="btn primary" id="cutPlay">▶ Смотреть</button><button class="btn ghost" id="cutStop">Стоп</button><button class="btn" id="cutExport" title="Склеить клипы по порядку в один mp4 с музыкой (ComfyUI, ffmpeg)">⬇ Собрать ролик</button><span id="cutMeta"></span><audio id="cutAudio"></audio></div>
+          <ol class="cut-list" id="cutList"></ol>
+        </section>
+        <section class="tab" data-tab="tasks" id="tabTasks" hidden></section>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- НИЗ: пианино -->
+  <footer class="piano-wrap" id="pianoWrap"><div class="ptoggles" id="pToggles"></div><div class="piano" id="piano"></div>
+    <button class="zones-btn" id="zonesBtn" data-mode="full"><svg viewBox="0 0 22 22" width="18" height="18"><path d="M2 2h8v7H2zM12 2h8v7h-8zM2 11h5v9H2zM9 11h4v9H9zM15 11h5v9h-5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"/></svg><span class="zl">Зоны</span><i class="zd"><b></b><b></b><b></b></i></button>
+
+
+    <!-- радио / музыка -->
+    <div class="radio" id="radio">
+      <div class="r-top"><button class="r-chip" id="rAddUrl">+ Радио</button><button class="r-chip" id="rAddFolder">+ Папка</button><button class="r-chip" id="rAddFiles">+ Треки</button><button class="r-chip" id="rOpen" title="Плейлист и режимы">☰</button></div>
+      <div class="r-bar"><button class="r-play" id="rPlay" title="Музыка">♪</button><div class="r-info"><b id="rTitle">Радио · музыка</b><span id="rSub">добавьте треки или ссылку</span></div><button class="r-btn" id="rPrev" title="Предыдущий">⏮</button><button class="r-btn" id="rNext" title="Следующий">⏭</button></div>
+      <div class="r-panel" id="rPanel" hidden></div>
+      <audio id="rAudio"></audio><input type="file" id="rFolderIn" webkitdirectory multiple hidden><input type="file" id="rFilesIn" accept="audio/*" multiple hidden>
+    </div>
+  </footer>
+</div>
+
+<div class="radial" id="radial" hidden><svg id="rsvg"></svg></div>
+<div class="dragghost" id="ghost" hidden></div>
+<div class="peek" id="peek" hidden></div>
+<div class="pop" id="pop" hidden></div>
+<div class="overlay" id="overlay" hidden></div>
+<div class="sheet-back" id="sheetBack" hidden><form class="sheet" id="sheet" autocomplete="off"></form></div>
+<div class="rest" id="rest" hidden><div class="curtain l"><div class="scene"></div></div><div class="curtain r"><div class="scene"></div></div><button class="rest-eye" title="Вернуться к столу"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></button>
+  <div class="rest-card"><div class="rc-brand"><span>Director’s</span> <i>Table</i></div><div class="rc-sub">for ComfyUI</div><div class="rc-status"><span class="lamp" id="restLamp"></span><span id="restTxt">Простой</span></div><div class="rc-bar"><i id="restBar"></i></div><div class="rc-hint">клик или любая клавиша — вернуться</div></div></div>
+<div class="toast" id="toast" hidden></div>
+<div class="voice-hud" id="voiceHud" hidden><span class="vu"></span><span id="voiceTxt">Слушаю…</span></div>
+<input type="file" id="fileIn" accept="image/*,video/*,audio/*" multiple hidden>
+<input type="file" id="folderIn" webkitdirectory multiple hidden>
+<input type="file" id="wfIn" accept=".json,application/json" multiple hidden>
+
+<script src="/directors-table/i18n.js"></script>
+<script src="/directors-table/core.js"></script>
+<script src="/directors-table/ui.js"></script>
+<script src="/directors-table/extras.js"></script>
+<script src="/directors-table/features.js"></script>
+<script src="/directors-table/maestro.js"></script>
+<script src="/directors-table/polish.js"></script>
+<script src="/directors-table/fixes.js"></script>
+<script src="/directors-table/v23.js"></script>
+<script src="/directors-table/studio.js"></script>
+<script src="/directors-table/camsphere.js"></script>
+<script src="/directors-table/wstudio.js"></script>
+<script src="/directors-table/sound.js"></script>
+<script src="/directors-table/demo.js"></script>
+</body>
+</html>

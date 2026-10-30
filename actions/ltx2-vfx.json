@@ -1,0 +1,714 @@
+{
+ "id": "ltx2-vfx",
+ "title": "VFX-эффект",
+ "menu": [
+  "Эффекты",
+  "VFX на кадр"
+ ],
+ "kind": "video",
+ "about": "LTX-2: код рисует черновик эффекта (портал, огонь, искры…) поверх кадра, LTX превращает его в реалистичное видео со звуком.",
+ "accepts": [
+  "image"
+ ],
+ "output": {
+  "node": "190",
+  "kind": "video"
+ },
+ "zone": "fx",
+ "estimate": "≈1 мин на секунду видео на 12 ГБ",
+ "params": [
+  {
+   "id": "image",
+   "type": "card",
+   "targets": [
+    {
+     "node": "240",
+     "field": "image",
+     "transform": "file"
+    }
+   ]
+  },
+  {
+   "id": "effect",
+   "type": "select",
+   "label": "Эффект",
+   "default": 0,
+   "options": [
+    {
+     "label": "Магический портал",
+     "value": "portal"
+    },
+    {
+     "label": "Огонь",
+     "value": "fire"
+    },
+    {
+     "label": "Искры",
+     "value": "sparks"
+    },
+    {
+     "label": "Дождь",
+     "value": "rain"
+    },
+    {
+     "label": "Снег",
+     "value": "snow"
+    },
+    {
+     "label": "Молния",
+     "value": "lightning"
+    },
+    {
+     "label": "Дым",
+     "value": "smoke"
+    },
+    {
+     "label": "Аура силы",
+     "value": "aura"
+    },
+    {
+     "label": "Ударная волна",
+     "value": "shockwave"
+    },
+    {
+     "label": "Магические частицы",
+     "value": "magic"
+    },
+    {
+     "label": "Рассыпается в пыль",
+     "value": "dissolve"
+    },
+    {
+     "label": "Цифровой сбой",
+     "value": "glitch"
+    }
+   ],
+   "targets": [
+    {
+     "node": "400",
+     "field": "effect"
+    }
+   ]
+  },
+  {
+   "id": "point",
+   "type": "point",
+   "label": "Где эффект — кликните по кадру",
+   "default": [
+    0.5,
+    0.5
+   ],
+   "targets": [
+    {
+     "node": "400",
+     "field": "center_x",
+     "transform": "index",
+     "index": 0
+    },
+    {
+     "node": "400",
+     "field": "center_y",
+     "transform": "index",
+     "index": 1
+    }
+   ]
+  },
+  {
+   "id": "prompt",
+   "type": "text",
+   "label": "Что происходит в кадре (описание эффекта добавится само)",
+   "default": "Cinematic shot, the character looks on in awe.",
+   "targets": [
+    {
+     "node": "400",
+     "field": "prompt"
+    }
+   ]
+  },
+  {
+   "id": "size",
+   "type": "number",
+   "label": "Размер эффекта",
+   "min": 0.1,
+   "max": 1.2,
+   "step": 0.05,
+   "default": 0.35,
+   "targets": [
+    {
+     "node": "400",
+     "field": "size"
+    }
+   ]
+  },
+  {
+   "id": "intensity",
+   "type": "number",
+   "label": "Яркость черновика",
+   "min": 0.3,
+   "max": 2,
+   "step": 0.1,
+   "default": 1.0,
+   "targets": [
+    {
+     "node": "400",
+     "field": "intensity"
+    }
+   ]
+  },
+  {
+   "id": "guide",
+   "type": "number",
+   "label": "Насколько LTX следует черновику",
+   "min": 0.2,
+   "max": 1,
+   "step": 0.05,
+   "default": 0.6,
+   "targets": [
+    {
+     "node": "401",
+     "field": "strength"
+    }
+   ]
+  },
+  {
+   "id": "seconds",
+   "type": "number",
+   "label": "Длительность, с",
+   "min": 2,
+   "max": 6,
+   "step": 1,
+   "default": 3,
+   "targets": [
+    {
+     "node": "162",
+     "field": "length",
+     "transform": "frames",
+     "fps": 24
+    },
+    {
+     "node": "400",
+     "field": "frames",
+     "transform": "frames",
+     "fps": 24
+    },
+    {
+     "node": "405",
+     "field": "frames_number",
+     "transform": "frames",
+     "fps": 24
+    }
+   ]
+  },
+  {
+   "id": "format",
+   "type": "select",
+   "label": "Формат",
+   "default": 1,
+   "options": [
+    {
+     "label": "Горизонталь 16:9 · 1280×704",
+     "value": [
+      1280,
+      704
+     ]
+    },
+    {
+     "label": "Как картинка (авто)",
+     "value": "auto"
+    },
+    {
+     "label": "Вертикаль 9:16 · 704×1280",
+     "value": [
+      704,
+      1280
+     ]
+    },
+    {
+     "label": "Квадрат · 960×960",
+     "value": [
+      960,
+      960
+     ]
+    },
+    {
+     "label": "Быстрый черновик · 768×448",
+     "value": [
+      768,
+      448
+     ]
+    }
+   ],
+   "targets": [
+    {
+     "node": "241",
+     "field": "width",
+     "transform": "index",
+     "index": 0
+    },
+    {
+     "node": "241",
+     "field": "height",
+     "transform": "index",
+     "index": 1
+    }
+   ]
+  },
+  {
+   "id": "seed",
+   "type": "seed",
+   "targets": [
+    {
+     "node": "178",
+     "field": "noise_seed"
+    },
+    {
+     "node": "400",
+     "field": "seed"
+    }
+   ]
+  }
+ ],
+ "workflow": {
+  "184": {
+   "class_type": "CheckpointLoaderSimple",
+   "inputs": {
+    "ckpt_name": "ltx-2-19b-distilled-fp8.safetensors"
+   },
+   "_meta": {
+    "title": "Модель LTX-2"
+   }
+  },
+  "284": {
+   "class_type": "LoraLoaderModelOnly",
+   "inputs": {
+    "lora_name": "ltx-2-19b-distilled-lora-384.safetensors",
+    "strength_model": -0.3,
+    "model": [
+     "184",
+     0
+    ]
+   },
+   "_meta": {
+    "title": "LoRA"
+   }
+  },
+  "293": {
+   "class_type": "DualCLIPLoaderGGUF",
+   "inputs": {
+    "clip_name1": "gemma_3_12B_it_fp8_e4m3fn.safetensors",
+    "clip_name2": "ltx-2-19b-embeddings_connector_dev_bf16.safetensors",
+    "type": "ltxv"
+   },
+   "_meta": {
+    "title": "Текстовый энкодер"
+   }
+  },
+  "295": {
+   "class_type": "VAELoader",
+   "inputs": {
+    "vae_name": "LTX2_video_vae_bf16.safetensors"
+   },
+   "_meta": {
+    "title": "Видео VAE"
+   }
+  },
+  "171": {
+   "class_type": "LTXVAudioVAELoader",
+   "inputs": {
+    "ckpt_name": "ltx-2-19b-distilled-fp8.safetensors"
+   },
+   "_meta": {
+    "title": "Аудио VAE"
+   }
+  },
+  "240": {
+   "class_type": "LoadImage",
+   "inputs": {
+    "image": "example.png"
+   },
+   "_meta": {
+    "title": "Кадр"
+   }
+  },
+  "241": {
+   "class_type": "ImageResizeKJv2",
+   "inputs": {
+    "width": 1280,
+    "height": 704,
+    "upscale_method": "lanczos",
+    "keep_proportion": "crop",
+    "pad_color": "0, 0, 0",
+    "crop_position": "center",
+    "divisible_by": 32,
+    "device": "cpu",
+    "image": [
+     "240",
+     0
+    ]
+   },
+   "_meta": {
+    "title": "Размер"
+   }
+  },
+  "269": {
+   "class_type": "LTXVPreprocess",
+   "inputs": {
+    "img_compression": 25,
+    "image": [
+     "241",
+     0
+    ]
+   },
+   "_meta": {
+    "title": "Подготовка кадра"
+   }
+  },
+  "400": {
+   "class_type": "DTVFXGuide",
+   "inputs": {
+    "image": [
+     "241",
+     0
+    ],
+    "effect": "portal",
+    "frames": 97,
+    "center_x": 0.5,
+    "center_y": 0.5,
+    "size": 0.35,
+    "intensity": 1.0,
+    "seed": 0,
+    "color": "",
+    "prompt": "Cinematic shot."
+   },
+   "_meta": {
+    "title": "VFX-черновик"
+   }
+  },
+  "169": {
+   "class_type": "CLIPTextEncode",
+   "inputs": {
+    "text": [
+     "400",
+     1
+    ],
+    "clip": [
+     "293",
+     0
+    ]
+   },
+   "_meta": {
+    "title": "Промпт"
+   }
+  },
+  "317": {
+   "class_type": "CLIPTextEncode",
+   "inputs": {
+    "text": "blurry, distorted, low quality, text, watermark",
+    "clip": [
+     "293",
+     0
+    ]
+   },
+   "_meta": {
+    "title": "Негатив"
+   }
+  },
+  "164": {
+   "class_type": "LTXVConditioning",
+   "inputs": {
+    "frame_rate": 24,
+    "positive": [
+     "169",
+     0
+    ],
+    "negative": [
+     "317",
+     0
+    ]
+   },
+   "_meta": {
+    "title": "Кондиционирование"
+   }
+  },
+  "162": {
+   "class_type": "EmptyLTXVLatentVideo",
+   "inputs": {
+    "width": [
+     "241",
+     1
+    ],
+    "height": [
+     "241",
+     2
+    ],
+    "length": 97,
+    "batch_size": 1
+   },
+   "_meta": {
+    "title": "Пустое видео"
+   }
+  },
+  "239": {
+   "class_type": "LTXVImgToVideoInplace",
+   "inputs": {
+    "strength": 1.0,
+    "bypass": false,
+    "vae": [
+     "295",
+     0
+    ],
+    "image": [
+     "269",
+     0
+    ],
+    "latent": [
+     "162",
+     0
+    ]
+   },
+   "_meta": {
+    "title": "Первый кадр"
+   }
+  },
+  "401": {
+   "class_type": "LTXVAddGuide",
+   "inputs": {
+    "positive": [
+     "164",
+     0
+    ],
+    "negative": [
+     "164",
+     1
+    ],
+    "vae": [
+     "295",
+     0
+    ],
+    "latent": [
+     "239",
+     0
+    ],
+    "image": [
+     "400",
+     0
+    ],
+    "frame_idx": 0,
+    "strength": 0.6
+   },
+   "_meta": {
+    "title": "Черновик эффекта → LTX"
+   }
+  },
+  "405": {
+   "class_type": "LTXVEmptyLatentAudio",
+   "inputs": {
+    "audio_vae": [
+     "171",
+     0
+    ],
+    "frames_number": 97,
+    "frame_rate": 24,
+    "batch_size": 1
+   },
+   "_meta": {
+    "title": "Пустой звук"
+   }
+  },
+  "166": {
+   "class_type": "LTXVConcatAVLatent",
+   "inputs": {
+    "video_latent": [
+     "401",
+     2
+    ],
+    "audio_latent": [
+     "405",
+     0
+    ]
+   },
+   "_meta": {
+    "title": "Видео + звук"
+   }
+  },
+  "178": {
+   "class_type": "RandomNoise",
+   "inputs": {
+    "noise_seed": 1
+   },
+   "_meta": {
+    "title": "Seed"
+   }
+  },
+  "154": {
+   "class_type": "KSamplerSelect",
+   "inputs": {
+    "sampler_name": "euler_ancestral"
+   },
+   "_meta": {
+    "title": "Сэмплер"
+   }
+  },
+  "238": {
+   "class_type": "BasicScheduler",
+   "inputs": {
+    "scheduler": "simple",
+    "steps": 10,
+    "denoise": 1,
+    "model": [
+     "284",
+     0
+    ]
+   },
+   "_meta": {
+    "title": "Шаги"
+   }
+  },
+  "153": {
+   "class_type": "CFGGuider",
+   "inputs": {
+    "cfg": 1,
+    "model": [
+     "284",
+     0
+    ],
+    "positive": [
+     "401",
+     0
+    ],
+    "negative": [
+     "401",
+     1
+    ]
+   },
+   "_meta": {
+    "title": "Гид"
+   }
+  },
+  "161": {
+   "class_type": "SamplerCustomAdvanced",
+   "inputs": {
+    "noise": [
+     "178",
+     0
+    ],
+    "guider": [
+     "153",
+     0
+    ],
+    "sampler": [
+     "154",
+     0
+    ],
+    "sigmas": [
+     "238",
+     0
+    ],
+    "latent_image": [
+     "166",
+     0
+    ]
+   },
+   "_meta": {
+    "title": "Генерация"
+   }
+  },
+  "245": {
+   "class_type": "LTXVSeparateAVLatent",
+   "inputs": {
+    "av_latent": [
+     "161",
+     0
+    ]
+   },
+   "_meta": {
+    "title": "Разделить видео и звук"
+   }
+  },
+  "402": {
+   "class_type": "LTXVCropGuides",
+   "inputs": {
+    "positive": [
+     "401",
+     0
+    ],
+    "negative": [
+     "401",
+     1
+    ],
+    "latent": [
+     "245",
+     0
+    ]
+   },
+   "_meta": {
+    "title": "Убрать кадры черновика"
+   }
+  },
+  "282": {
+   "class_type": "LTXVSpatioTemporalTiledVAEDecode",
+   "inputs": {
+    "spatial_tiles": 2,
+    "spatial_overlap": 4,
+    "temporal_tile_length": 16,
+    "temporal_overlap": 4,
+    "last_frame_fix": false,
+    "working_device": "auto",
+    "working_dtype": "auto",
+    "vae": [
+     "295",
+     0
+    ],
+    "latents": [
+     "402",
+     2
+    ]
+   },
+   "_meta": {
+    "title": "Сборка кадров"
+   }
+  },
+  "406": {
+   "class_type": "LTXVAudioVAEDecode",
+   "inputs": {
+    "samples": [
+     "245",
+     1
+    ],
+    "audio_vae": [
+     "171",
+     0
+    ]
+   },
+   "_meta": {
+    "title": "Звук эффекта"
+   }
+  },
+  "190": {
+   "class_type": "VHS_VideoCombine",
+   "inputs": {
+    "frame_rate": 24,
+    "loop_count": 0,
+    "filename_prefix": "DT-VFX",
+    "format": "video/h264-mp4",
+    "pix_fmt": "yuv420p",
+    "crf": 19,
+    "save_metadata": true,
+    "trim_to_audio": false,
+    "pingpong": false,
+    "save_output": true,
+    "images": [
+     "282",
+     0
+    ],
+    "audio": [
+     "406",
+     0
+    ]
+   },
+   "_meta": {
+    "title": "Сохранить видео"
+   }
+  }
+ }
+}

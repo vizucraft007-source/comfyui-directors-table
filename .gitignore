@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+data/
+actions/user/
+*.part
+.env
+*.log
+demo/out/
