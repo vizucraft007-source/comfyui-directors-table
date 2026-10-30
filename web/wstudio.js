@@ -35,7 +35,7 @@ function wsFill(el, a) {
   const wf = a.wf && wfById(a.wf);
   if (!wf) {
     if (el.dataset.sig === 'pick') return; el.dataset.sig = 'pick';
-    el.innerHTML = `<div class="ws-pick"><b>Какой workflow здесь будет?</b><span>Выберите — зона станет его рабочим местом.</span><div class="ws-wfs">${WFS.map(w => `<button type="button" data-wspick="${esc(w.id)}" style="--c:${KIND_C[w.kind] || '#8f74f2'}"><i></i><span data-noi18n>${esc(w.title)}</span><em>${esc(KIND_RU[w.kind] || '')}</em></button>`).join('') || '<span class="hint">Сначала добавьте workflow (Инструменты).</span>'}</div></div>`;
+    el.innerHTML = `<div class="ws-pick"><b>Какой workflow здесь будет?</b><span>Выберите — зона станет его рабочим местом.</span><div class="ws-wfs">${WFS.map(w => `<button type="button" data-wspick="${esc(w.id)}" style="--c:${KIND_C[w.kind] || '#8f74f2'}"><i></i><span data-noi18n>${esc(T(w.title))}</span><em>${esc(KIND_RU[w.kind] || '')}</em></button>`).join('') || '<span class="hint">Сначала добавьте workflow (Инструменты).</span>'}</div></div>`;
     return;
   }
   const subs = (a.subs && a.subs.length ? a.subs : WS_DEFAULT);
@@ -43,7 +43,7 @@ function wsFill(el, a) {
   if (el.dataset.sig !== sig) {
     el.dataset.sig = sig;
     el.style.setProperty('--c', KIND_C[wf.kind] || '#3fd2ff');
-    el.innerHTML = `<div class="ws-head"><i></i><b data-noi18n>${esc(wf.title)}</b><span class="ws-kind">${esc(KIND_RU[wf.kind] || '')}</span><button type="button" class="ws-gear" data-wsgear title="Под-блоки и workflow">⚙</button></div>
+    el.innerHTML = `<div class="ws-head"><i></i><b data-noi18n>${esc(T(wf.title))}</b><span class="ws-kind">${esc(KIND_RU[wf.kind] || '')}</span><button type="button" class="ws-gear" data-wsgear title="Под-блоки и workflow">⚙</button></div>
       <div class="ws-body">${(() => { const d = s => `<div class="ws-sub ws-${s}" data-sub="${s}"></div>`, side = ['prompt', 'inputs', 'params'].filter(s => subs.includes(s));
         return `<div class="ws-top${subs.includes('screen') ? '' : ' noscreen'}${side.length ? '' : ' noside'}">${subs.includes('screen') ? d('screen') : ''}${side.length ? `<div class="ws-side">${side.map(d).join('')}</div>` : ''}</div>${['history', 'info'].filter(s => subs.includes(s)).map(d).join('')}`; })()}</div>`;
     const pp = promptParam(wf), box = el.querySelector('.ws-prompt');
@@ -114,7 +114,7 @@ setInterval(() => { if ($('.zone-panel[data-panel="wstudio"]') && S.cards.some(c
 areasEl.addEventListener('click', e => {
   const el = e.target.closest('.zone-panel[data-panel="wstudio"]'); if (!el) return;
   const a = wsArea(el.dataset.area); if (!a) return;
-  const pick = e.target.closest('[data-wspick]'); if (pick) return wsSetArea(a.id, x => { x.wf = pick.dataset.wspick; x.note = ''; x.label = wfById(pick.dataset.wspick)?.title?.slice(0, 40) || x.label; if (!x.subs) x.subs = WS_DEFAULT.slice(); }, 'workflow студии');
+  const pick = e.target.closest('[data-wspick]'); if (pick) return wsSetArea(a.id, x => { x.wf = pick.dataset.wspick; x.note = ''; x.label = T(wfById(pick.dataset.wspick)?.title || '').slice(0, 40) || x.label; if (!x.subs) x.subs = WS_DEFAULT.slice(); }, 'workflow студии');
   const wf = wfById(a.wf); if (!wf) return;
   const w = wsWidget(wf);
   if (e.target.closest('[data-wsrun]')) {

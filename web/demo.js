@@ -112,7 +112,7 @@ const DEMO_TL = [
     run: async () => {
       const wf = WFS.find(w => w.kind === 'video' && promptParam(w)) || WFS[0];
       const base = LAYOUTS.wsvideo;
-      S.customLayouts = { ...(S.customLayouts || {}), demows: { id: 'demows', label: base.label, areas: base.areas.map(a => a.panel === 'wstudio' ? { ...a, wf: wf?.id, note: '', label: (wf?.title || a.label).slice(0, 40), subs: WS_DEFAULT.slice() } : { ...a }) } };
+      S.customLayouts = { ...(S.customLayouts || {}), demows: { id: 'demows', label: base.label, areas: base.areas.map(a => a.panel === 'wstudio' ? { ...a, wf: wf?.id, note: '', label: T(wf?.title || a.label).slice(0, 40), subs: WS_DEFAULT.slice() } : { ...a }) } };
       applyLayout('demows'); cap('Рабочее место, как у MiniMax', 'экран · промпт · входы · параметры · история · время и модель');
       await sleep(900);
       const ta = $('.zone-panel[data-panel="wstudio"] [data-wsprompt]');
