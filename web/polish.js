@@ -115,3 +115,6 @@ widgetMenu = function (w) {
   items.splice(2, 0, { label: 'Входы', enabled: true, children: ins });
   return items;
 };
+// точка-коннектор не должна «висеть» на старом месте, когда карточку тащат
+cardsEl.addEventListener('pointerdown', e => { if (e.target.closest('.card')) { clearTimeout(cdotHideT); cdot.hidden = true; cdotCard = null; } }, true);
+document.addEventListener('pointerup', () => { setTimeout(() => { if (!cdot.hidden && !cdot.matches(':hover') && !(cdotCard && document.querySelector(`.card[data-id="${cdotCard.id}"]:hover`))) cdot.hidden = true; }, 400); }, true);

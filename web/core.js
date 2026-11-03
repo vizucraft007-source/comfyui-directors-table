@@ -32,6 +32,8 @@ function cleanAction(a) {
 const KINDS = ['image', 'video', 'audio'];
 const KIND_RU = { image: 'картинка', video: 'видео', audio: 'звук', text: 'текст' };
 const KIND_C = { image: '#f0ff41', video: '#3fd2ff', audio: '#ff8a3d', text: '#6f8cff' };
+// озвучка и музыка — цвет зоны «Музыка · озвучка» (зелёный), звуковые эффекты — оранжевый
+const wfColor = wf => wf?.kind === 'audio' && /tts|voice|speech|озвуч|голос|music|song|ace|музык|песн/i.test((wf.title || '') + ' ' + (wf.id || '')) ? '#5fe3a1' : (KIND_C[wf?.kind] || null);
 const W = 1600; let H = 1000;       // логический размер холста: ширина постоянная, высота под окно
 // «Вид» стола (как значки в Windows): крупные / средние / мелкие / минимализм — меняет размер карточек и виджетов
 const VIEW_K = { large: [0.85, 1.0], medium: [0.7, 0.86], small: [0.56, 0.7], mini: [0.5, 0.62] };

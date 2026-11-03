@@ -42,7 +42,7 @@ function wsFill(el, a) {
   const sig = wf.id + '|' + subs.join(',');
   if (el.dataset.sig !== sig) {
     el.dataset.sig = sig;
-    el.style.setProperty('--c', KIND_C[wf.kind] || '#3fd2ff');
+    el.style.setProperty('--c', wfColor(wf) || '#3fd2ff');
     el.innerHTML = `<div class="ws-head"><i></i><b data-noi18n>${esc(T(wf.title))}</b><span class="ws-kind">${esc(KIND_RU[wf.kind] || '')}</span><button type="button" class="ws-gear" data-wsgear title="Под-блоки и workflow">⚙</button></div>
       <div class="ws-body">${(() => { const d = s => `<div class="ws-sub ws-${s}" data-sub="${s}"></div>`, side = ['prompt', 'inputs', 'params'].filter(s => subs.includes(s));
         return `<div class="ws-top${subs.includes('screen') ? '' : ' noscreen'}${side.length ? '' : ' noside'}">${subs.includes('screen') ? d('screen') : ''}${side.length ? `<div class="ws-side">${side.map(d).join('')}</div>` : ''}</div>${['history', 'info'].filter(s => subs.includes(s)).map(d).join('')}`; })()}</div>`;

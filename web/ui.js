@@ -167,7 +167,7 @@ function runStatus(run) {
 }
 function widgetHTML(w) {
   const wf = wfById(w.wf);
-  const color = KIND_C[wf?.kind] || '#8f74f2';
+  const color = wfColor(wf) || '#8f74f2';
   const jobs = jobsOf(w), results = jobs.filter(c => c.status === 'done'), run = jobs.find(c => c.status === 'running'), wait = jobs.filter(c => c.status === 'queued');
   const errs = jobs.filter(c => c.status === 'error' && !c.errSeen).length;
   const last = results.sort((a, b) => (b.done || 0) - (a.done || 0))[0];
@@ -343,7 +343,7 @@ function drawThreads() {
   for (const g of geo) {
     const { w, p, pw, ph, wait, vert, down, right } = g;
     const pa = areaAt(g.pcx, g.pcy), wa = g.wa;
-    const c1 = pa?.c || KIND_C[p.kind] || '#8f74f2', c2 = wa?.c || KIND_C[wfById(w.wf)?.kind] || '#3fd2ff';
+    const c1 = pa?.c || KIND_C[p.kind] || '#8f74f2', c2 = wa?.c || wfColor(wfById(w.wf)) || '#3fd2ff';
     const cls = wait ? 'wait' : '';
     let x1, y1, x2, y2, d;
     if (pa && wa && pa.id !== wa.id) {
@@ -1046,7 +1046,7 @@ function renderPiano() {
     const style = g ? ` style="background:linear-gradient(180deg,${g.color}66,var(--ivory) 30%)"` : '';
     if (wb) {
       // белая клавиша с workflow
-      h += `<button class="key wfk${gcls}${sel.size ? ' hot' : ''}" data-i="${i}" data-bind="${code}" style="--c:${KIND_C[wb.kind] || '#8f74f2'}${g ? `;background:linear-gradient(180deg,${g.color}66,var(--ivory) 30%)` : ''}" title="${esc(wb.title)} (${codeLabel(code)}). Правый клик — сменить или освободить"><i class="wbar"></i><span class="n">${codeLabel(code)}</span><span class="t">${esc(wb.title.replace(/^↗ /, ''))}</span><span class="c">${wb.open ? '↗ открыть' : '▶ workflow'}</span></button>`;
+      h += `<button class="key wfk${gcls}${sel.size ? ' hot' : ''}" data-i="${i}" data-bind="${code}" style="--c:${wfColor(wb) || '#8f74f2'}${g ? `;background:linear-gradient(180deg,${g.color}66,var(--ivory) 30%)` : ''}" title="${esc(wb.title)} (${codeLabel(code)}). Правый клик — сменить или освободить"><i class="wbar"></i><span class="n">${codeLabel(code)}</span><span class="t">${esc(wb.title.replace(/^↗ /, ''))}</span><span class="c">${wb.open ? '↗ открыть' : '▶ workflow'}</span></button>`;
     } else if (sh) {
       const cs = S.cards.filter(c => c.sheet === sh.id && !c.parked), busy = S.cards.some(c => c.sheet === sh.id && (c.status === 'running' || c.status === 'queued'));
       if (sh.hidden) h += `<button class="key hid${gcls}" data-i="${i}" data-sheet="${sh.id}" title="${esc(sh.name)} — скрыта, файлы сохранены (${cs.length} шт.). Клик — вернуть"><span class="n">${codeLabel(code)}</span><span class="t">${esc(sh.name)}</span><span class="c">скрыта · ${cs.length}</span></button>`;
@@ -1527,7 +1527,7 @@ function drawResults() {
   const w = ovW; if (!w) return;
   const wf = wfById(w.wf);
   const jobs = jobsOf(w).sort((a, b) => (b.done || b.created) - (a.done || a.created));
-  const color = KIND_C[wf?.kind] || '#8f74f2';
+  const color = wfColor(wf) || '#8f74f2';
   overlay.innerHTML = `<div class="ov" style="--c:${color}"><header><h3>${esc(wf ? wf.title : 'Workflow')}</h3><span>${jobs.filter(j => j.status === 'done').length} готово · клик — выбрать, перетащите на холст, двойной клик — подробно</span><div class="spacer"></div><button class="btn ghost small" data-a="all">Выбрать все</button><button class="btn ghost small" data-a="close">Закрыть <kbd>Esc</kbd></button></header>
     <div class="grid">${jobs.length ? jobs.map(j => `<div class="res k-${j.kind}${ovSel.has(j.id) ? ' sel' : ''}" data-id="${j.id}"><span class="ck2">${ovSel.has(j.id) ? '✓' : ''}</span>${fileHTML(j).replace('<div class="media">', `<div class="media">${j.status === 'running' ? `<span class="badge run">${esc(j.step || 'идёт')}</span>` : j.status === 'queued' ? '<span class="badge">в очереди</span>' : ''}`)}</div>`).join('') : '<div class="empty">Здесь будут результаты этого workflow.<br>Пока пусто: перетащите картинку на виджет — откроются параметры, нажмите «Запустить».</div>'}</div>
     <div class="acts"><span style="margin-right:auto;font-size:12px;color:var(--dim)">${ovSel.size ? 'Выбрано: ' + ovSel.size : jobs.length ? 'Кликните по результату, чтобы выбрать' : ''}</span><button class="btn ghost" data-a="del" ${ovSel.size ? '' : 'disabled'}>Удалить выбранные</button><button class="btn ghost" data-a="cut" ${ovSel.size ? '' : 'disabled'}>В монтаж</button><button class="btn primary" data-a="out" ${ovSel.size ? '' : 'disabled'}>На холст</button></div></div>`;

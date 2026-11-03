@@ -4,9 +4,23 @@
 
 > Built for the Comfy **Open Source Higgsfield** challenge. Categories: Best Overall · Most Innovative · Most Viral · Open Weights Only · VFX Workflow Built with LTX.
 
+### Two modes in one studio
+
+| 🎬 **Director** | ✦ **Production** |
+|---|---|
+| The desk: zones, threads, Maestro, piano keys, camera sphere, script → film. Full control for people who like to direct every shot. | A Higgsfield-style showcase for everyone else: categories on the left (Video · Cinema studio · VFX · Lipsync & voice · Music · Images · Influencer & social · Edit), big task cards in the middle. Click *Talking photo* and a ready workspace opens — prompt, inputs, ▶ Run, result, history. No nodes, no zones. |
+
+Switch at the top of the screen. **52 task cards, 34 of them backed by 38 official open-weights ComfyUI templates** that already ship with ComfyUI — character swap in video (Wan SCAIL), multi-person lipsync (InfiniteTalk), HuMo, LTX 2.3 IC-LoRA control, ID-LoRA for a consistent influencer face and voice, character & scene angles (Qwen Multiple-Angles), photo edit and outfit swap (Qwen-Image-Edit 2511), relight, background removal (BiRefNet), layers, photo → 3D (Hunyuan3D), music (ACE-Step 1.5), upscale, frame interpolation, object removal and outpainting in video (Wan VACE)… No partner nodes, no API templates.
+
+Every card says honestly what it is: **ready** (works now), **1 click · Comfy template** (the desk checks which models you have, links the missing files and turns the template into a ready workspace), or **in development** (on our roadmap; the card links to open projects by other authors — we link, we don't copy their code).
+
+**🧬 Influencer studio** — Higgsfield-style character builder on open models: 19 look settings as buttons (who, gender, origin, age, skin, build, face and eye shape, hair, facial hair, distinctive features like freckles, vitiligo, braces, elf ears, outfit, accessories, background, framing), three levels from *Average* to *Extreme*, *in your own words* in any language, 🎲 random. Generates 4 portraits on your text-to-image model (Z-Image Turbo / FLUX.2 klein fit 12 GB), builds a character sheet (one-image turnaround, or exact angles from the picked portrait via the official Qwen Multiple-Angles template), then saves the hero to *Characters*, animates it, makes it talk, keeps face and voice with LTX 2.3 ID-LoRA (no training), and exports a captioned LoRA training set (ai-toolkit format).
+
+**Influencer & social** — see one result inside Instagram, Reels/TikTok, YouTube, Shorts, Telegram, LinkedIn, X and Facebook frames at once, with crop warnings and safe zones; a local model (Ollama) writes a caption for each network from one sentence; images export in every size (1080×1350, 1080×1920, 1920×1080…). Nothing is posted anywhere, and an *AI-generated* tag is on by default.
+
 ### For the judges — 30-second tour
 
-Open **Tools → 🎥 Demo for recording**: the table shows itself in ~75 seconds (nothing is generated, everything is restored afterwards).
+Open **✦ Production** at the top, then try *Talking photo* or *Social preview*. For the desk, open **Tools → 🎥 Demo for recording**: the table shows itself in ~75 seconds (nothing is generated, everything is restored afterwards).
 
 | Category | What to look at |
 |---|---|
@@ -72,6 +86,7 @@ Not sure what a zone does? Hover its title, click the ⚙ gear, then **▶ How i
 
 | | |
 |---|---|
+| **✦ Production mode** | A task showcase in the spirit of Higgsfield, on your own open models: 8 categories, 52 task cards (34 on official open ComfyUI templates, one click each) with live previews from your own generations, search, a ready workspace per task, a two-step *Avatar from text* (voice → talking photo), *Social preview* with captions for 8 networks, and an honest *In development* shelf. |
 | **Canvas with zones** | Video · Images · Effects · Montage (center) · Text · Design · Sound · Music · Voiceover · Script · Assistant. Cards snap softly into zones; overlapping cards spread out by themselves. **Ctrl+Space** sorts everything. Each zone has its own ⚙ settings: name, color, lines. There are 4 line styles (**Shift+G**). |
 | **Workflow widgets** | Drop any ComfyUI workflow file, either *Export (API)* or a regular one, onto the table. Inputs are detected automatically: image, audio, video, prompt, negative, seed, size, duration, steps and named primitives. **Double-click** a widget to open the real ComfyUI graph inside a tab, edit it, then **Save to widget**. The tab shows the last real run (your image and prompt). |
 | **Radial menu** | Right-click or hold a card. Up to 4 levels, and outer rings get thinner. Move the cursor far away to cancel. Widget items: Run (same as last time / edit prompt / all settings), ■ Stop, Inside, To a key, Results. |
@@ -114,6 +129,9 @@ Not sure what a zone does? Hover its title, click the ⚙ gear, then **▶ How i
 
 ## What's next
 
+- **Fill the *In development* shelf:** new angle from one frame (Qwen-Image-Edit + Multiple-Angles), outfit swap, background removal, upscale, mask edit, next-gen VFX on LTX IC-LoRAs (effect over the original plate), video translation with lip-sync, beat-synced music videos.
+- **Multi-person lipsync with face markers:** click faces 1, 2, 3 on the frame, assign who says which line, and InfiniteTalk (Wan 14B, official Comfy template already wired as a card) animates every mouth.
+- **Auto-posting** to Telegram, YouTube, X, Instagram and others — keys stay only on your computer.
 - **Open code models inside the desk.** As open-weight coding models (Qwen, Kimi and others) get stronger, a local *code widget* will write new VFX drafts, presets and studio layouts on request — the assistant already edits layouts and presets as plain JSON.
 - **Motion-design for ads.** Code-built animated banners and title sequences (the frame splits into panels, captions fly in) combined with LTX shots — premium commercial look without After Effects.
 - **More from the "In development" shelf:** layout from a text description (Ollama), video translation with lip-sync, influencer LoRA training, voice swap, explainer videos.

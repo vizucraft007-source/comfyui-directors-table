@@ -1145,6 +1145,50 @@ async def dt_llm_script(request):
         return web.json_response({"shots": fallback, "source": "rules", "detail": str(e)})
 
 
+SOCIAL_NETS = {"instagram", "reels", "tiktok", "youtube", "shorts", "telegram", "linkedin", "x", "facebook"}
+
+
+@routes.post("/directors-table/api/llm/captions")
+async def dt_llm_captions(request):
+    """Продакшн → соцсети: одна идея поста → подпись под каждую соцсеть (локальная Ollama, ничего не публикуется)."""
+    b = await request.json()
+    url = _llm_url(b.get("url"))
+    model = b.get("model") or ""
+    nets = [n for n in (b.get("nets") or []) if n in SOCIAL_NETS][:9] or ["instagram", "telegram", "x"]
+    about = str(b.get("about") or "").strip()[:1500]
+    brand = str(b.get("brand") or "").strip()[:80]
+    rules = str(b.get("rules") or "").strip()[:800]
+    lang = str(b.get("lang") or "en")[:10]
+    if not about:
+        return web.json_response({"error": "empty"}, status=400)
+    system = ("You write social media captions. Answer JSON only: {\"captions\": {\"<network>\": \"<text>\"}} with one key per requested network. "
+              "Match each network's style: instagram — warm, 3-6 hashtags at the end; reels/tiktok/shorts — one punchy hook line plus 2-4 hashtags; "
+              "youtube — a clear title line, then 2 short sentences; telegram — friendly, short paragraph, no hashtags; "
+              "linkedin — professional, 2-3 short sentences, a takeaway; x — under 260 characters; facebook — conversational, 1-3 sentences. "
+              "Never invent facts, prices, people or results that are not in the brief. Write in language: " + lang + ".")
+    user = "Networks: " + ", ".join(nets) + "\nBrand / account: " + (brand or "-") + "\nWhat the post is about: " + about + ("\nAuthor's rules: " + rules if rules else "")
+    try:
+        import aiohttp
+        async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=180)) as s:
+            if not model:
+                async with s.get(url + "/api/tags") as r:
+                    ms = [m.get("name") for m in (await r.json()).get("models", [])]
+                if not ms:
+                    return web.json_response({"error": "no-models"}, status=400)
+                model = ms[0]
+            payload = {"model": model, "stream": False, "keep_alive": 0, "format": "json", "options": {"temperature": 0.7, **({"num_gpu": 0} if b.get("cpu") else {})},
+                       "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]}
+            async with s.post(url + "/api/chat", json=payload) as r:
+                j = await r.json()
+        raw = re.sub(r"(?s)<think>.*?</think>", "", (j.get("message") or {}).get("content", "")).strip()
+        m = re.search(r"(?s)\{.*\}", raw)
+        caps = (json.loads(m.group(0)) if m else {}).get("captions") or {}
+        out = {n: str(caps.get(n) or "").strip()[:2200] for n in nets if isinstance(caps, dict) and caps.get(n)}
+        return web.json_response({"captions": out, "model": model})
+    except Exception as e:
+        return web.json_response({"error": "no-ollama", "detail": str(e)}, status=400)
+
+
 # ---------------- статика (последним, чтобы не перекрыть api) ----------------
 @routes.get("/directors-table/{name}")
 async def dt_static(request):
