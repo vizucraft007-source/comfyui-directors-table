@@ -4,6 +4,11 @@
 
 > Built for the Comfy **Open Source Higgsfield** challenge. Categories: Best Overall · Most Innovative · Most Viral · Open Weights Only · VFX Workflow Built with LTX.
 
+### 🎥 Demo videos
+
+- **Production mode (v1.5):** https://youtu.be/j1velmAtBvM
+- **Director's desk — Maestro, piano keys, camera sphere (v1.4):** https://youtu.be/3JjOj_GV1ak
+
 ### Two modes in one studio
 
 | 🎬 **Director** | ✦ **Production** |
