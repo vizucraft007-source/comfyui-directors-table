@@ -189,7 +189,32 @@ function pTask(main) {
 const pAreaOf = el => ({ id: el.dataset.parea, wf: el.dataset.pwf, subs: P_SUBS });
 function pRefresh() { if (!P.on || !P.task) return; $$('.pguide', prodEl).forEach(g => { try { pGuide(g); } catch (e) { console.warn('guide', e); } }); $$('.pwsp', prodEl).forEach(el => { try { wsFill(el, pAreaOf(el)); pPromptTools(el); } catch (e) { console.warn('prod', e); } }); }
 // у поля промпта — 🎙 надиктовать (Whisper, локально) и ✨ улучшить (Ollama, локально)
+// короткие подсказки под каждым параметром рабочего места
+const P_HINT = {
+  effect: ['какой эффект нарисует код: огонь, портал, молния, искры…', 'which effect the code draws: fire, portal, lightning, sparks…'],
+  size: ['размер эффекта в кадре: 0,2 — маленький, 0,6 — на полкадра', 'effect size: 0.2 small, 0.6 half the frame'],
+  intensity: ['яркость черновика: 1 — обычно, выше — эффект заметнее', 'draft brightness: 1 is normal, higher is stronger'],
+  guide: ['0,3–0,4 — живое движение; 0,6+ — кадр почти «замерзает»', '0.3–0.4 lively motion; 0.6+ the frame nearly freezes'],
+  seconds: ['длина ролика; меньше — быстрее генерация', 'clip length; shorter renders faster'],
+  format: ['размер кадра: как у картинки, 16:9 или 9:16', 'frame size: like the image, 16:9 or 9:16'],
+  strength: ['0,7 — держится за фото; 0,4–0,5 — больше движения губ и лица', '0.7 sticks to the photo; 0.4–0.5 more lip and face motion'],
+  speed: ['1 — обычная скорость речи', '1 is normal speech speed'],
+  voice: ['опишите голос по-английски: female, young, warm, low pitch…', 'describe the voice: female, young, warm, low pitch…'],
+  seed: ['пусто — каждый раз новый вариант; число — повторить тот же', 'empty — a new variant each time; a number repeats it'],
+  steps: ['больше шагов — качественнее, но дольше', 'more steps — better but slower'],
+  cfg: ['насколько строго следовать промпту', 'how strictly to follow the prompt'],
+  denoise: ['насколько сильно менять исходник', 'how much to change the source'],
+};
+function pParamHints(el) {
+  el.querySelectorAll('.ws-params label').forEach(l => {
+    if (l.querySelector('.ws-hint')) return;
+    const inp = l.querySelector('[data-wspar]'); const id = String(inp?.dataset.wspar || '').toLowerCase();
+    const k = Object.keys(P_HINT).find(k => id === k || id.includes(k)); if (!k) return;
+    l.insertAdjacentHTML('beforeend', `<small class="ws-hint" data-noi18n>${esc(px(...P_HINT[k]))}</small>`);
+  });
+}
 function pPromptTools(el) {
+  pParamHints(el);
   const ta = el.querySelector('[data-wsprompt]'); if (!ta) return;
   if (!ta.id) ta.id = 'pp_' + String(el.dataset.pwf).replace(/[^\w-]/g, '_');
   const row = el.querySelector('.ws-prompt .ws-row'); if (!row || row.querySelector('.pp-tools')) return;
@@ -229,6 +254,9 @@ function pGuide(g) {
   let n = 0, allIn = true;
   const steps = kinds.map(k => { const c = ins.find(x => x.kind === k), K = PG_KIND[k]; if (!c) allIn = false; n++;
     return `<button type="button" class="pg-step pg-in${c ? ' ok' : ''}" data-pgadd="${k}"><span class="pg-n">${c ? PICON('check') : n}</span><span class="pg-th">${c ? (k === 'audio' ? `<i class="pg-play${pgAudio && pgAudio.dataset.id == c.id && !pgAudio.paused ? ' on' : ''}" data-pgplay="${c.id}" title="${esc(px('Прослушать', 'Listen'))}">${PICON(pgAudio && pgAudio.dataset.id == c.id && !pgAudio.paused ? 'sound' : 'play')}</i>` : mediaHTML(c)) : PICON(K[2])}</span><span class="pg-tx"><b>${esc(px(K[0], K[1]))}</b><small>${c ? esc(c.title) + ' · ' + esc(px('нажмите, чтобы заменить', 'click to replace')) : esc(px(K[3], K[4]))}</small></span>${!c && k === 'audio' && pCard('tts') ? `<i class="pg-link" data-pgtts>${esc(px('→ Озвучка', '→ Text to voice'))}</i>` : ''}</button>`; });
+  const ptP = (wf.params || []).find(p => p.type === 'point'), src = ptP && ins.find(x => x.kind === 'image');
+  if (ptP && src) { n++; const pt = (S.lastParams[wf.id] || {})[ptP.id] || ptP.default || [.5, .5];
+    steps.push(`<div class="pg-step pg-point ok"><span class="pg-n">${n}</span><span class="pg-pt" data-pgpoint="${esc(ptP.id)}" title="${esc(px('Кликните, где будет эффект', 'Click where the effect goes'))}">${mediaHTML(src)}<i style="left:${pt[0] * 100}%;top:${pt[1] * 100}%"></i></span><span class="pg-tx"><b>${esc(px('Где эффект', 'Where the effect goes'))}</b><small>${esc(px('кликните по кадру слева', 'click on the frame'))}</small></span></div>`); }
   if (pp) { n++; steps.push(`<div class="pg-step pg-txt ok"><span class="pg-n">${n}</span><span class="pg-tx"><b>${esc(px('Опишите, что происходит', 'Describe what happens'))}</b><small>${esc(px('поле справа — можно по-русски, ✨ улучшит промпт', 'the field on the right — any language; ✨ improves the prompt'))}</small></span></div>`); }
   n++;
   steps.push(`<button type="button" class="pg-step pg-run${allIn ? ' ready' : ''}" data-pgrun ${running ? 'disabled' : ''}><span class="pg-n">${PICON('play')}</span><span class="pg-tx"><b>${run ? esc(px('Генерация', 'Generating')) + ' ' + Math.round((run.progress || 0) * 100) + '%' : running ? esc(px('В очереди…', 'Queued…')) : esc(px('Запустить', 'Run'))}</b><small>${run ? esc(runStatus(run)) : allIn ? esc(px('всё готово · Ctrl+Enter', 'all set · Ctrl+Enter')) : esc(px('сначала добавьте файлы выше', 'add the files first'))}</small>${run ? `<i class="pg-bar" style="width:${Math.round((run.progress || 0) * 100)}%"></i>` : ''}</span></button>`);
@@ -245,6 +273,7 @@ prodEl.addEventListener('click', e => {
     else { try { pgAudio?.pause(); } catch (_) { } pgAudio = new Audio(srcOf(c)); pgAudio.dataset.id = c.id; pgAudio.onended = pgAudio.onpause = () => pRefresh(); pgAudio.play().catch(() => toast(px('Не удалось воспроизвести.', 'Could not play.'))); }
     return setTimeout(pRefresh, 50);
   }
+  const pt = t.closest('[data-pgpoint]'); if (pt) { const r = pt.getBoundingClientRect(), x = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)), y = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height)); S.lastParams[wf.id] = { ...(S.lastParams[wf.id] || {}), [pt.dataset.pgpoint]: [+x.toFixed(3), +y.toFixed(3)] }; save(); g.dataset.sig = ''; return pGuide(g); }
   const a = t.closest('[data-pgadd]'); if (a) return pickFileFor(wsWidget(wf), a.dataset.pgadd);
   const r = t.closest('[data-pgrun]'); if (r && !r.disabled) {
     if (!r.classList.contains('ready')) return toast(px('Сначала добавьте файлы: нажмите на пустой шаг.', 'Add the files first: click an empty step.'));

@@ -1427,3 +1427,8 @@ body.prod-on .piano-wrap,body.prod-on #maestroOrb{display:none!important}
 .if-stack img,.if-stack video{width:100%;height:100%;object-fit:cover}
 .if-stack em{position:absolute;right:6px;bottom:6px;font-style:normal;font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;background:var(--plime);color:#111}
 .if-stack:hover{border-color:rgba(240,255,65,.5)}
+#prod .ws-hint{font-size:10.5px;line-height:1.35;color:#7d88aa;white-space:normal}
+#prod .pwsp .ws-params{gap:10px 12px}
+.pg-pt{position:relative;flex:none;width:96px;aspect-ratio:16/10;border-radius:8px;overflow:hidden;border:1px solid var(--pline);cursor:crosshair;background:#000}
+.pg-pt img,.pg-pt video{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.pg-pt i{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;border:2px solid #fff;background:var(--plime);box-shadow:0 0 10px var(--plime);pointer-events:none}
